@@ -1,18 +1,41 @@
-using DataStructures, Graphs
+using DataStructures, Graphs, Combinatorics, Random, StatsBase
+
+# k: Number of items, l: Number of bids
+function sample_instances(k, l)
+    bids = Tuple{Array{Int64,1}, Int64}[]
+
+    min_items = max(1, round(Int, k * 0.05))  
+    max_items = min(k, round(Int, k * 0.15))  
+
+    # 각 비드 생성
+    for i in 1:l
+        # 랜덤 아이템 개수: 설정된 최소와 최대 사이
+        item_count = rand(min_items:max_items)
+
+        # 아이템 랜덤 선택
+        selected_items = sample(1:k, item_count, replace=false)
+
+        # 랜덤 가격 설정
+        price = rand(20:100)
+
+        # 비드 배열에 추가
+        push!(bids, (selected_items, price))
+    end
+
+    return bids
+end
 
 function find_unique_bids(bids)
-    # Efficient look-up and update를 위한 딕셔너리 사용
     bid_dict = Dict{Set{Int}, Int}()
 
     for bid in bids
         subset, price = bid
-        subset_set = Set(subset) # Ensure the subset is treated as a Set
+        subset_set = Set(subset)  
         if !haskey(bid_dict, subset_set) || bid_dict[subset_set] < price
             bid_dict[subset_set] = price
         end
     end
 
-    # 딕셔너리를 일반 리스트로 변환
     unique_bids = [(subset, price) for (subset, price) in bid_dict]
 
     return unique_bids
