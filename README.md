@@ -80,9 +80,9 @@ This project is based on the paper: "A Graph-Based Ant Algorithm for the Winner 
 - The TRACA algorithm provides a competitive heuristic approach with good performance in reasonable computation times.
 - Combining different methods and comparing their results helps in understanding the strengths and limitations of each approach.
 
-## License
+<!-- ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. -->
 
 ## Acknowledgments
 
